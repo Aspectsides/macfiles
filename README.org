@@ -1,7 +1,7 @@
 #+title: Dotfiles
 
 * Dotfiles
-[[~/Desktop/screenshot.png]]
+[[scrots/theonlyone.png]]
 
 * Table of Contents :toc:
 - [[#dotfiles][Dotfiles]]
