@@ -1,0 +1,89 @@
+export external_bar_height="24"
+export external_bar_position="top"
+export shadow_toggle="off"
+export mouse_mod="ctrl"
+export border_toggle="on"
+export border_width="2"
+export border_radius="0"
+export opacity_toggle="off"
+export layout="bsp"
+export gap_width="17"
+export animation_duration="0"
+export autoraise_toggle="on"
+
+sudo yabai --load-sa
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+
+if [[ $autoraise_toggle == "on" ]]; then
+   yabai -m config focus_follows_mouse autoraise
+fi
+
+yabai -m config window_shadow $shadow_toggle
+yabai -m config mouse_modifier $mouse_mod
+yabai -m config layout $layout
+yabai -m config window_animation_duration $animation_duration
+yabai -m config window_border_radius $border_radius
+
+yabai -m config window_opacity             $opacity_toggle
+yabai -m config window_opacity_duration    0.2
+yabai -m config active_window_opacity      1.0
+yabai -m config normal_window_opacity      0.9
+
+### Confgure mouse usage ###
+yabai -m config mouse_action1              resize   # with left click - resize
+yabai -m config mouse_action2              move     # with right click - move
+
+yabai -m config window_border $border_toggle
+yabai -m config window_border_width $border_width
+yabai -m config active_window_border_color 0xFF6faec0
+yabai -m config normal_window_border_color 0xFF3e4050
+
+if [[ $external_bar_position == "top" ]]; then
+   yabai -m config top_padding                $(expr $gap_width + $external_bar_height)
+   yabai -m config bottom_padding             $gap_width
+   yabai -m config left_padding               $gap_width
+   yabai -m config right_padding              $gap_width
+   yabai -m config window_gap                 $gap_width
+
+fi
+if [[ $external_bar_position == "bottom" ]]; then
+   yabai -m config top_padding                $gap_width
+   yabai -m config bottom_padding             $(expr $gap_width + $external_bar_height)
+   yabai -m config left_padding               $gap_width
+   yabai -m config right_padding              $gap_width
+   yabai -m config window_gap                 $gap_width
+
+fi
+if [[ $external_bar_position == "left" ]]; then
+   yabai -m config top_padding                $gap_width
+   yabai -m config bottom_padding             $gap_width
+   yabai -m config left_padding               $(expr $gap_width + $external_bar_height)
+   yabai -m config right_padding              $gap_width
+   yabai -m config window_gap                 $gap_width
+
+fi
+if [[ $external_bar_position == "right" ]]; then
+   yabai -m config top_padding                $gap_width
+   yabai -m config bottom_padding             $gap_width
+   yabai -m config left_padding              $gap_width
+   yabai -m config right_padding              $(expr $gap_width + $external_bar_height)
+   yabai -m config window_gap                 $gap_width
+
+fi
+
+yabai -m rule --add app="^(Calculator|System Preferences|zoom.us|Photo Booth|Archive Utility|Color Picker|balenaEtcher)$" manage=off
+yabai -m rule --add app="^(XQuartz)$" layer=above manage=off
+
+yabai -m space 1 --label Code
+yabai -m space 2 --label Text
+yabai -m space 3 --label Web
+yabai -m space 4 --label Idle
+yabai -m space 5 --label Misc
+yabai -m space 6 --label doc
+yabai -m space 7 --label help
+yabai -m space 8 --label music
+
+yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
+yabai -m signal --add event=window_title_changed action="sketchybar --trigger title_change"
+
+echo "yabai configuration loaded.."

@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name:
+# uuid:
+# key: <pre
+# condition: t
+# --
+
+#+DESCRIPTION:
+#+AUTHOR: Aspect
+#+EXPORT_FILE_NAME: ~/nc/Org/html/school/cyranocharacters.html
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+#+OPTIONS: num:nil

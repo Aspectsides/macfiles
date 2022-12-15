@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: css
+# uuid:
+# key: <export-css
+# condition: t
+# --
+#+begin_quote
+#+HTML_HEAD: <link rel="sylesheet" type="text/css" href="~/nc/Org/readtheorg.css">
+#+end_quote

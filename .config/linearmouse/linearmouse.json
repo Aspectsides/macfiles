@@ -1,0 +1,19 @@
+{
+  "$schema" : "https:\/\/app.linearmouse.org\/schema\/0.7.4",
+  "schemes" : [
+    {
+      "pointer" : {
+        "disableAcceleration" : true
+      },
+      "if" : {
+        "device" : {
+          "productName" : "M720 Triathlon",
+          "serialNumber" : "3631287F83AEC327",
+          "productID" : "0xb015",
+          "category" : "mouse",
+          "vendorID" : "0x46d"
+        }
+      }
+    }
+  ]
+}
