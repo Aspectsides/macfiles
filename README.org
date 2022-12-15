@@ -1,0 +1,121 @@
+#+title: Dotfiles
+
+* Dotfiles
+[[~/Desktop/screenshot.png]]
+
+* Table of Contents :toc:
+- [[#dotfiles][Dotfiles]]
+- [[#info][Info]]
+- [[#emacs-fork][Emacs Fork]]
+- [[#updates][Updates]]
+  - [[#colorscheme][Colorscheme]]
+  - [[#bar][Bar]]
+  - [[#yabai][Yabai]]
+  - [[#emacs][Emacs]]
+- [[#installation-instructions][Installation Instructions]]
+  - [[#install-dependencies][Install dependencies]]
+  - [[#fonts][Fonts]]
+  - [[#clone-this-repository][Clone this repository]]
+  - [[#moving-config-files][Moving config files]]
+  - [[#thats-it-youre-done][That's it! You're done!]]
+- [[#credit-where-credit-is-due][Credit where credit is due]]
+
+* Info
+This repository contains my personal MacOS dotfiles for programs including, but not limited to,
+- Kitty
+- Doom Emacs
+- Yabai (literate)
+- CAVA
+- tmux
+- fish
+- skhd
+- sketchybar
+- and more
+These files were designed for use on my system, which is a 2020 M1 MacBook Air running MacOS Ventura. They may not work for your system.
+
+* Emacs Fork
+The Emacs fork that I use is a fork called emacs-plus, which was designed for use with MacOS. You can install it with
+#+begin_src shell
+brew install emacs-plus --with-no-titlebar --with-native-comp
+#+end_src
+I use Doom Emacs, which you can install with
+#+begin_src shell
+git clone --depth 1 --single-branch https://github.com/doomemacs/doomemacs ~/.config/emacs
+~/.config/emacs/bin/doom install
+#+end_src
+
+* Updates
+** Colorscheme
+- Switched to the Dracula colorscheme
+** Bar
+- Switched to a bar with powerline, as well as changing the colors to match with Dracula colors a little better.
+- Changed the *WWW* space to be the first space in the bar, as I spend most of my time there anyways.
+** Yabai
+- Rewrote my yabairc in Emacs ORG mode mainly as an experiment, but also to educate people about what each line in my config does and make it easier to jump to various sections, as well as making it easier for people to steal from it.
+- Turned off opacity based focus, as it was a little distracting
+** Emacs
+- Switched to a literate config.org
+- Installed dashboard.el in order to be able to see my org-agenda items and recent files on the homescreen
+
+* Installation Instructions
+** Install dependencies
+- Install yabai
+#+begin_src shell
+brew install yabai
+#+end_src
+- Install skhd
+#+begin_src shell
+brew install skhd
+#+end_src
+- Install jq
+#+begin_src shell
+brew install jq
+#+end_src
+-Install kitty
+#+begin_src shell
+brew install kitty
+#+end_src
+- Install sketchybar
+#+begin_src shell
+brew tap FelixKratz/formulae
+brew install sketchybar
+#+end_src
+- Install tmux
+#+begin_src shell
+brew install tmux
+#+end_src
+-install CAVA
+#+begin_src shell
+brew install cava
+#+end_src
+- Install dmenu using the instrucions here: [[https://github.com/saifshahriar/dmenu][saifshahriar/dmenu: My build of suckless's demnu.]] (Thanks for this if you see this btw this is amazing)
+
+** Fonts
+- Fira Code Nerd Font
+#+begin_src shell
+brew install font-fira-code-nerd-font
+#+end_src
+- JetBrains Mono Nerd Font from Nerd Font https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/JetBrainsMono.zip
+- Ubuntu Mono Nerd Font
+#+begin_src shell
+brew install font-ubuntu
+#+end_src
+
+** Clone this repository
+#+begin_src shell
+git clone https://github.com/Aspectsides/dotfiles.git
+#+end_src
+
+** Moving config files
+- Backup your current .config folder and .doom.d folder if you already have one.
+- Move .config to ~/.config
+- Move .doom.d to ~/.doom.d and run
+#+begin_src shell
+doom sync
+#+end_src
+- Move .tmux.conf to ~/.tmux.conf
+** That's it! You're done!
+
+* Credit where credit is due
+- Thanks to [[https://github.com/itaysharir][itaysharir (Itay Sharir)]] for the amazing sketchybar config
+- Thanks to [[https://www.youtube.com/c/DistroTube/videos][DistroTube - YouTube]] for providing the basis for many of my config files, as well as getting me into Emacs, which I simultaneausly hate him for and cannot thank him enough for.
