@@ -71,7 +71,7 @@ brew install skhd
 #+begin_src shell
 brew install jq
 #+end_src
--Install kitty
+- Install kitty
 #+begin_src shell
 brew install kitty
 #+end_src
@@ -84,7 +84,7 @@ brew install sketchybar
 #+begin_src shell
 brew install tmux
 #+end_src
--install CAVA
+- install CAVA
 #+begin_src shell
 brew install cava
 #+end_src
