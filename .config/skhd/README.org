@@ -1,3 +1,35 @@
+#+title: SKHD Config
+#+PROPERTY: header-args :tangle ~/.config/skhd/skhdrc
+
+* SKHD Config
+* Table of Contents :toc:
+- [[#skhd-config][SKHD Config]]
+- [[#about-this-config][About This Config]]
+- [[#open-various-apps][Open Various Apps]]
+- [[#dmenu-scripts][Dmenu scripts]]
+- [[#focus-windows][Focus windows]]
+- [[#change-layouts-of-windows][Change Layouts of Windows]]
+- [[#space-commands][Space Commands]]
+- [[#moving-windows][Moving Windows]]
+- [[#stacks][Stacks]]
+- [[#change-desktop-layout][Change desktop layout]]
+- [[#restart-yabai][Restart Yabai]]
+
+* About This Config
+skhd is a simple hotkey daemon for macOS that focuses on responsiveness and performance. Hotkeys are defined in a text file through a simple DSL. skhd is able to hotload its config file, meaning that hotkeys can be edited and updated live while skhd is running. This is my personal SKHD config file, and some of the settings in this config might not work for your machine if the programs involved are not installed.
+
+* Open Various Apps
+This block opens various applications, including kitty (my terminal emulator of choice), various emacs buffers, qutebrowser, as well as some terminal applications such as nnn (my file manager of choice), and
+| Keybinding | Action                  |
+|------------+-------------------------|
+| [M]+Ret    | Open Kitty              |
+| [M]+e      | Open NNN                |
+| [M]+q      | Open Emacs              |
+| [M]+y      | Open Dired              |
+| [M]+n      | Open Spotify TUI        |
+| [M]+z      | Open CAVA               |
+| [CMD]+q    | Quit the focused window |
+#+begin_src conf
 lalt - return : /Applications/kitty.app/Contents/MacOS/kitty -1 ~
 cmd - q: yabai -m window --close
 lalt - e: /Applications/kitty.app/Contents/MacOS/kitty --single-instance -e nnn -e -H ~
@@ -8,7 +40,11 @@ lalt - q: emacsclient -c -a 'emacs' --eval '(dashboard-refresh-buffer)'
 lalt - w: emacsclient -c --eval '(elfeed)'
 lalt - b: /Applications/qutebrowser.app
 lalt - i: emacsclient -c --eval '(ibuffer)'
+#+end_src
 
+* Dmenu scripts
+This block opens up dmenu and runs certain scripts that I have on my machine. You can get these scripts as well as instructions on how to install Dmenu on Mac from [[https://github.com/itaysharir/Mac-Dmenu-Scripts][itaysharir/Mac-Dmenu-Scripts: macOS compatible dmenu scripts and instructions to run and patch dmenu on macOS.]]
+#+begin_src conf
 lalt + shift - return : open -a Xquartz && /bin/bash -l -c "sh ~/dmenu\ scripts/apps.sh"
 lalt + shift - t : open -a Xquartz && /bin/bash -l -c "sh ~/dmenu\ scripts/themes.sh"
 lalt + shift - l : open -a Xquartz && /bin/bash -l -c "sh ~/dmenu\ scripts/logout.sh"
@@ -17,19 +53,31 @@ lalt + shift - b : open -a Xquartz && /bin/bash -l -c "sh ~/dmenu\ scripts/web.s
 lalt + shift - e : open -a Xquartz && /bin/bash -l -c "sh ~/dmenu\ scripts/editconfig.sh"
 lalt + shift - d : open -a Xquartz && /bin/bash -l -c "sh ~/dmenu\ scripts/todo.sh"
 lalt + shift - m : open -a Xquartz && /bin/bash -l -c "sh ~/dmenu\ scripts/wallpaper.sh"
+#+end_src
 
+* Focus windows
+These keybindings change window focus with [M] + hjkl.
+#+begin_src conf
 lalt - h : yabai -m window --focus west
 lalt - j : yabai -m window --focus south
 lalt - k : yabai -m window --focus north
 lalt - l : yabai -m window --focus east
+#+end_src
 
+* Change Layouts of Windows
+These keybindings tell the focused window to float, fullscreen, etc.
+#+begin_src conf
 alt - f : yabai -m window --toggle zoom-fullscreen
 shift + alt - f : yabai -m window --toggle native-fullscreen
 lalt - space : yabai -m window --toggle float --grid 4:4:1:1:2:2; sketchybar --trigger window_focus
 alt - p : yabai -m window --toggle border --toggle pip
 ctrl + lalt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
 shift + lalt - space : sketchybar --bar hidden=toggle
+#+end_src
 
+* Space Commands
+These keybindings correspond to actions related to spaces. [M] + 1-8 switches between spaces, but I have that commented out as I set native hotkeys via System Settings for less latency. [M]+Shift+1-8 moves a window to a particular space. [M]+R rotates the current space.
+#+begin_src conf
 lalt - r         : yabai -m space --rotate 270
 
 #lalt - 1 : yabai -m space --focus 1
@@ -45,12 +93,20 @@ shift + lalt - 1 : if [ "$(yabai -m query --displays --display | jq '.index')" -
 shift + lalt - 2 : if [ "$(yabai -m query --displays --display | jq '.index')" -eq "1" ]; then yabai -m window --space 2; else yabai -m window --space 6; fi
 shift + lalt - 3 : if [ "$(yabai -m query --displays --display | jq '.index')" -eq "1" ]; then yabai -m window --space 3; else yabai -m window --space 7; fi
 shift + lalt - 4 : if [ "$(yabai -m query --displays --display | jq '.index')" -eq "1" ]; then yabai -m window --space 4; else yabai -m window --space 8; fi
+#+end_src
 
+* Moving Windows
+These keybindings allow you to move windows around using [M]+Shift+hjkl.
+#+begin_src conf
 shift + lalt - h : yabai -m window --swap west
 shift + lalt - j : yabai -m window --swap south
 shift + lalt - k  : yabai -m window --swap north
 shift + lalt - l : yabai -m window --swap east
+#+end_src
 
+* Stacks
+These keybinds allow you to create and navigate within stakes. Create stacks with Shift + Ctrl + hjkl and navigate within them using Shift+Ctrl+n p
+#+begin_src conf
 shift + ctrl - h    : yabai -m window  west --stack $(yabai -m query --windows --window | jq -r '.id'); sketchybar --trigger window_focus
 shift + ctrl - j    : yabai -m window south --stack $(yabai -m query --windows --window | jq -r '.id'); sketchybar --trigger window_focus
 shift + ctrl - k    : yabai -m window north --stack $(yabai -m query --windows --window | jq -r '.id'); sketchybar --trigger window_focus
@@ -59,14 +115,22 @@ shift + ctrl - l : yabai -m window  east --stack $(yabai -m query --windows --wi
 # Stack Navigation: shift + ctrl - {n, p}
 shift + ctrl - n : yabai -m window --focus stack.next
 shift + ctrl - p : yabai -m window --focus stack.prev
+#+end_src
 
+* Change desktop layout
+Use ctrl+[m]+s to cycle between bsp and floating
+#+begin_src conf
 ctrl + alt - a : yabai -m space --layout bsp
 ctrl + alt - d : yabai -m space --layout float
 ctrl + alt - s : yabai -m space --layout $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')
-
+#+end_src
+* Restart Yabai
+Restart Yabai with [M]+shift+r
+#+begin_src conf
 lalt + shift - r : \
     osascript -e \
         "display notification \"Restarting Yabai\" with title \"Yabai\""; \
     brew services restart sketchybar; \
     brew services restart yabai; \
     brew services restart skhd
+#+end_src

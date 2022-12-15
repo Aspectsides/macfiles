@@ -11,6 +11,7 @@
   - [[#colorscheme][Colorscheme]]
   - [[#bar][Bar]]
   - [[#yabai][Yabai]]
+  - [[#skhd][SKHD]]
   - [[#emacs][Emacs]]
 - [[#installation-instructions][Installation Instructions]]
   - [[#install-dependencies][Install dependencies]]
@@ -28,7 +29,7 @@ This repository contains my personal MacOS dotfiles for programs including, but 
 - CAVA
 - tmux
 - fish
-- skhd
+- skhd (literate)
 - sketchybar
 - and more
 These files were designed for use on my system, which is a 2020 M1 MacBook Air running MacOS Ventura. They may not work for your system.
@@ -53,6 +54,8 @@ git clone --depth 1 --single-branch https://github.com/doomemacs/doomemacs ~/.co
 ** Yabai
 - Rewrote my yabairc in Emacs ORG mode mainly as an experiment, but also to educate people about what each line in my config does and make it easier to jump to various sections, as well as making it easier for people to steal from it.
 - Turned off opacity based focus, as it was a little distracting
+** SKHD
+- Rewrote my config in org mode, cleaned up some unneeded keybindings.
 ** Emacs
 - Switched to a literate config.org
 - Installed dashboard.el in order to be able to see my org-agenda items and recent files on the homescreen
@@ -88,7 +91,7 @@ brew install tmux
 #+begin_src shell
 brew install cava
 #+end_src
-- Install dmenu using the instrucions here: [[https://github.com/saifshahriar/dmenu][saifshahriar/dmenu: My build of suckless's demnu.]] (Thanks for this if you see this btw this is amazing)
+- Install dmenu using the instrucions here: [[https://github.com/itaysharir/Mac-Dmenu-Scripts][itaysharir/Mac-Dmenu-Scripts: macOS compatible dmenu scripts and instructions to run and patch dmenu on macOS.]] (Thanks for this if you see this btw this is amazing)
 
 ** Fonts
 - Fira Code Nerd Font
@@ -114,6 +117,7 @@ git clone https://github.com/Aspectsides/dotfiles.git
 doom sync
 #+end_src
 - Move .tmux.conf to ~/.tmux.conf
+
 ** That's it! You're done!
 
 * Credit where credit is due
