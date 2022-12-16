@@ -56,6 +56,7 @@ git clone --depth 1 --single-branch https://github.com/doomemacs/doomemacs ~/.co
 - Turned off opacity based focus, as it was a little distracting
 ** SKHD
 - Rewrote my config in org mode, cleaned up some unneeded keybindings.
+- Fixed the keybinding to move a window to a different space
 ** Emacs
 - Switched to a literate config.org
 - Installed dashboard.el in order to be able to see my org-agenda items and recent files on the homescreen

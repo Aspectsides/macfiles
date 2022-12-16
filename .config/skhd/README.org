@@ -30,12 +30,10 @@ This block opens various applications, including kitty (my terminal emulator of 
 | [M]+z      | Open CAVA               |
 | [CMD]+q    | Quit the focused window |
 #+begin_src conf
-lalt - return : /Applications/kitty.app/Contents/MacOS/kitty -1 ~
-cmd - q: yabai -m window --close
-lalt - e: /Applications/kitty.app/Contents/MacOS/kitty --single-instance -e nnn -e -H ~
+lalt - return : /Applications/Alacritty.app/Contents/MacOS/alacritty
+#cmd - q: yabai -m window --close
+#lalt - e: /Applications/kitty.app/Contents/MacOS/kitty --single-instance -e nnn -e -H ~
 lalt - y: emacsclient -c --eval '(dired "~")'
-lalt - n: /Applications/kitty.app/Contents/MacOS/kitty --single-instance -e spt
-lalt - z: /Applications/kitty.app/Contents/MacOS/kitty --single-instance -e cava
 lalt - q: emacsclient -c -a 'emacs' --eval '(dashboard-refresh-buffer)'
 lalt - w: emacsclient -c --eval '(elfeed)'
 lalt - b: /Applications/qutebrowser.app
@@ -89,10 +87,14 @@ lalt - r         : yabai -m space --rotate 270
 #lalt - 7 : yabai -m space --focus 7
 #lalt - 8 : yabai -m space --focus 8
 
-shift + lalt - 1 : if [ "$(yabai -m query --displays --display | jq '.index')" -eq "1" ]; then yabai -m window --space 1; else yabai -m window --space 5; fi
-shift + lalt - 2 : if [ "$(yabai -m query --displays --display | jq '.index')" -eq "1" ]; then yabai -m window --space 2; else yabai -m window --space 6; fi
-shift + lalt - 3 : if [ "$(yabai -m query --displays --display | jq '.index')" -eq "1" ]; then yabai -m window --space 3; else yabai -m window --space 7; fi
-shift + lalt - 4 : if [ "$(yabai -m query --displays --display | jq '.index')" -eq "1" ]; then yabai -m window --space 4; else yabai -m window --space 8; fi
+shift + alt - 1 : yabai -m window --space 1; yabai -m space --focus 1
+shift + alt - 2 : yabai -m window --space 2; yabai -m space --focus 2
+shift + alt - 3 : yabai -m window --space 3; yabai -m space --focus 3
+shift + alt - 4 : yabai -m window --space 4; yabai -m space --focus 4
+shift + alt - 5 : yabai -m window --space 5; yabai -m space --focus 5
+shift + alt - 6 : yabai -m window --space 6; yabai -m space --focus 6
+shift + alt - 7 : yabai -m window --space 7; yabai -m space --focus 7
+shift + alt - 8 : yabai -m window --space 8; yabai -m space --focus 8
 #+end_src
 
 * Moving Windows
