@@ -19,13 +19,13 @@ update() {
         if [ "$(echo "$WINDOW" | jq '.["has-fullscreen-zoom"]')" = "true" ]; then
           args+=(--set $NAME icon=$YABAI_FULLSCREEN_ZOOM icon.color=$YELLOW)
         elif [ "$(echo "$WINDOW" | jq '.["has-parent-zoom"]')" = "true" ]; then
-          args+=(--set $NAME icon=$YABAI_PARENT_ZOOM icon.color=$BLUE)
+          args+=(--set $NAME icon=$YABAI_PARENT_ZOOM icon.color=0xffffffff)
         else
-          args+=(--set $NAME icon=$YABAI_GRID icon.color=$GREEN)
+          args+=(--set $NAME icon=$YABAI_GRID icon.color=0xffffffff)
         fi
         ;;
       "true")
-        args+=(--set $NAME icon=$YABAI_FLOAT icon.color=$MAGENTA)
+        args+=(--set $NAME icon=$YABAI_FLOAT icon.color=0xffffffff)
         ;;
     esac
   fi

@@ -7,7 +7,7 @@
 
 ## Import files (Colors, Fonts, Etc)
 import:
-  - ~/.config/alacritty/colorschemes/dracula.yml
+  - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
   - ~/.config/alacritty/fonts.yml
 
 ## Set environment variables
@@ -22,8 +22,8 @@ window:
     lines: 25
 
   padding:
-    x: 20
-    y: 20
+    x: 15
+    y: 15
 
   decorations: none
   startup_mode: Windowed
@@ -40,7 +40,7 @@ window:
 cursor:
   style:
     shape: Block
-    blinking: On
+    blinking: Off
 
   unfocused_hollow: false
 

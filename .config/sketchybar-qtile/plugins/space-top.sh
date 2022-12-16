@@ -8,12 +8,13 @@ fi
 
 if [ "$SELECTED" = "true" ]; then
   args+=(--set spaces_$DID.label label=${NAME#"spaces_$DID."} \
-         --set $NAME icon.background.y_offset=9              )
+         --set $NAME icon.background.y_offset=8              )
 else
   args+=(--set $NAME icon.background.y_offset=-20)
 fi
 
 sketchybar -m --animate tanh 0 "${args[@]}"
+# sketchybar -m --animate tanh 15 "${args[@]}"
 
 WIN=$(yabai -m query --spaces --space $SID | jq '.windows[0]')
 HAS_WINDOWS_OR_IS_SELECTED="true"

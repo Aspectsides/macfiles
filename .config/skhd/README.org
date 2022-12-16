@@ -31,7 +31,7 @@ This block opens various applications, including kitty (my terminal emulator of 
 | [CMD]+q    | Quit the focused window |
 #+begin_src conf
 lalt - return : /Applications/Alacritty.app/Contents/MacOS/alacritty
-#cmd - q: yabai -m window --close
+lalt + shift - c: yabai -m window --close
 #lalt - e: /Applications/kitty.app/Contents/MacOS/kitty --single-instance -e nnn -e -H ~
 lalt - y: emacsclient -c --eval '(dired "~")'
 lalt - q: emacsclient -c -a 'emacs' --eval '(dashboard-refresh-buffer)'
@@ -44,13 +44,9 @@ lalt - i: emacsclient -c --eval '(ibuffer)'
 This block opens up dmenu and runs certain scripts that I have on my machine. You can get these scripts as well as instructions on how to install Dmenu on Mac from [[https://github.com/itaysharir/Mac-Dmenu-Scripts][itaysharir/Mac-Dmenu-Scripts: macOS compatible dmenu scripts and instructions to run and patch dmenu on macOS.]]
 #+begin_src conf
 lalt + shift - return : open -a Xquartz && /bin/bash -l -c "sh ~/dmenu\ scripts/apps.sh"
-lalt + shift - t : open -a Xquartz && /bin/bash -l -c "sh ~/dmenu\ scripts/themes.sh"
-lalt + shift - l : open -a Xquartz && /bin/bash -l -c "sh ~/dmenu\ scripts/logout.sh"
-lalt + shift - r : open -a Xquartz && /bin/bash -l -c "sh ~/dmenu\ scripts/screenshot.sh"
 lalt + shift - b : open -a Xquartz && /bin/bash -l -c "sh ~/dmenu\ scripts/web.sh"
 lalt + shift - e : open -a Xquartz && /bin/bash -l -c "sh ~/dmenu\ scripts/editconfig.sh"
 lalt + shift - d : open -a Xquartz && /bin/bash -l -c "sh ~/dmenu\ scripts/todo.sh"
-lalt + shift - m : open -a Xquartz && /bin/bash -l -c "sh ~/dmenu\ scripts/wallpaper.sh"
 #+end_src
 
 * Focus windows

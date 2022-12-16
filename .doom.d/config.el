@@ -180,9 +180,13 @@
 (setq delete-by-moving-to-trash t
       trash-directory "~/.local/share/Trash/files/")
 
-(setq doom-theme 'doom-dracula)
-(map! :leader
-      :desc "Load new theme" "h t" #'counsel-load-theme)
+(use-package autothemer
+  :ensure t)
+
+(load-theme 'doom-catppuccin-theme.el t)
+;;(setq doom-theme 'doom-dracula)
+;;(map! :leader
+;;      :desc "Load new theme" "h t" #'counsel-load-theme)
 
 (use-package! elfeed-goodies)
 (elfeed-goodies/setup)
@@ -266,9 +270,9 @@
        :desc "Eww web browser" "w" #'eww
        :desc "Eww reload page" "R" #'eww-reload))
 
-(setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 13)
+(setq doom-font (font-spec :family "SFMono Nerd Font" :size 13)
       doom-variable-pitch-font (font-spec :family "Ubuntu" :size 13)
-      doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 24))
+      doom-big-font (font-spec :family "SFMono Nerd Font" :size 24))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))

@@ -9,11 +9,11 @@ BLUE=0xffeacb64
 YELLOW=0xffcf6e6e
 ORANGE=0xfffcf6e6e
 MAGENTA=0xffcf6e6e
-GREY=0xff2a2f38
+GREY=0xff292c37
 TRANSPARENT=0x00000000
 
 # General bar colors
-BAR_COLOR=$GREY # Grey bar
+BAR_COLOR=0xff292c37 # Grey bar
 ICON_COLOR=$WHITE # Color of all icons
 LABEL_COLOR=$WHITE # Color of all labels
 

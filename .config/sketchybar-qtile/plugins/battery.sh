@@ -3,7 +3,7 @@ CHARGING=$(pmset -g batt | grep "AC Power")
 if [[ $CHARGING != "" ]]; then
   sketchybar -m --set battery           \
     icon=""                          \
-    label="On-1 (${BATT_PERCENT}%)"
+    label="N/A  (${BATT_PERCENT}%)"
   exit 0
 fi
 case ${BATT_PERCENT} in
@@ -20,5 +20,4 @@ case ${BATT_PERCENT} in
     *) ICON=""
 esac
 sketchybar -m --set battery             \
-  icon="$ICON"                          \
-  label="On-0 (${BATT_PERCENT}%)" \
+  label="N/A  (${BATT_PERCENT}%)" \

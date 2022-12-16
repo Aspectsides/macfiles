@@ -61,8 +61,8 @@ yabai -m config active_window_opacity      1.0
 yabai -m config normal_window_opacity      0.9
 
 ### Confgure mouse usage ###
-yabai -m config mouse_action1              resize   # with left click - resize
-yabai -m config mouse_action2              move     # with right click - move
+yabai -m config mouse_action1              move   # with left click - resize
+yabai -m config mouse_action2              resize     # with right click - move
 #+end_src
 
 * Window Borders
@@ -117,7 +117,7 @@ fi
 Sets rules for how specific windows are managed. These include unresizable windows and Qxuartz, which I use for Dmenu.
 
 #+begin_src conf
-yabai -m rule --add app="^(Calculator|System Preferences|zoom.us|Photo Booth|Archive Utility|Color Picker|balenaEtcher)$" manage=off
+yabai -m rule --add app="^(Calculator|System Settings|ColorSlurp|zoom.us|Photo Booth|Archive Utility|Color Picker|balenaEtcher)$" manage=off
 yabai -m rule --add app="^(XQuartz)$" layer=above manage=off
 #+end_src
 

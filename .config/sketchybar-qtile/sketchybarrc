@@ -1,0 +1,272 @@
+#!/usr/bin/env sh
+
+source "$HOME/.config/sketchybar/colors.sh" # Loads all defined colors
+source "$HOME/.config/sketchybar/icons.sh" # Loads all defined icons
+
+ITEM_DIR="$HOME/.config/sketchybar/items" # Directory where the items are configured
+PLUGIN_DIR="$HOME/.config/sketchybar/plugins" # Directory where all the plugin scripts are stored
+
+FONT="Ubuntu" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
+
+PADDINGS=3 # All paddings use this value (icon, label, background and bar paddings)
+SEGMENT_SPACING=13 # The spacing between segments
+
+# Setting up the general bar appearance and default values
+sketchybar --bar     height=22                                           \
+                     corner_radius=0                                     \
+                     border_width=0                                      \
+                     margin=0                                            \
+                     blur_radius=0                                       \
+                     position=top                                        \
+                     padding_left=-6                                     \
+                     padding_right=4                                     \
+                     color=$BAR_COLOR                                    \
+                     topmost=off                                         \
+                     sticky=on                                           \
+                     shadow=on                                           \
+                     font_smoothing=off                                  \
+                     y_offset=0                                          \
+                     notch_width=0                                       \
+                                                                         \
+           --default drawing=on                                          \
+                     updates=when_shown                                  \
+                     label.font="FONT:Bold:13.0"                         \
+                     icon.font="$FONT:Bold:14.0"                         \
+                     icon.color=$ICON_COLOR                              \
+                     label.color=$LABEL_COLOR                            \
+                     icon.padding_left=$PADDINGS                         \
+                     icon.padding_right=$PADDINGS                        \
+                     label.padding_left=$PADDINGS                        \
+                     label.padding_right=$PADDINGS                       \
+                     background.padding_right=$PADDINGS                  \
+                     background.padding_left=$PADDINGS                   \
+
+# Template for the segment labels, i.e. space name, active app, date, ...
+sketchybar --add item           label_template left                          \
+           --set label_template icon.drawing=off                             \
+                                label.font="$FONT:Black:12.0"                \
+                                label.padding_right=5                        \
+                                click_script="$PLUGIN_DIR/toggle_bracket.sh" \
+                                background.padding_left=$SEGMENT_SPACING     \
+                                drawing=off
+
+# Python icon
+sketchybar   --add item       pylogo left                          \
+             --set pylogo     background.image=/Users/aspect/.config/sketchybar/python.png   \
+                              background.image.scale=0.8                                    \
+                              background.drawing=on                                             \
+                              background.padding_left=5                                         \
+
+
+# Spaces themselves are this
+source "$ITEM_DIR/spaces.sh"
+
+# Curent procces name
+sketchybar --add       event        window_focus                         \
+           --add       event        title_change                         \
+                                                                         \
+           --add       item         window_title left                    \
+           --set       window_title script="$PLUGIN_DIR/window_title.sh" \
+                                    label.font="Ubuntu:Regular:10.7"               \
+                                    label.y_offset=2                       \
+                                    label.color=0xffd1bfff                  \
+           --subscribe window_title window_focus title_change           \
+
+# Time Widget
+sketchybar --add item clock right                                                 \
+           --set clock update_freq=5                                             \
+                       label.font="$FONT:Bold:10.6"                           \
+                       icon.font="Font Awesome 6 Free:Solid:13.3"                     \
+                       label.color=0xffffffff                                       \
+                       label.padding_right=10                                    \
+                       background.color=0xff5071bd                            \
+                       background.height=45                                       \
+                       background.padding_right=-5                             \
+                       background.y_offset=-10                                       \
+                       script="$PLUGIN_DIR/clock.sh"                              \
+
+sketchybar --add item line1 right                                                 \
+           --set line1 update_freq=5                                             \
+                       label.font="$FONT:Bold:30.0"                           \
+                       label.color=0xffffffff                                       \
+                       label.padding_right=5                                    \
+                       background.color=0xff6e4187                            \
+                       background.height=45                                       \
+                       background.padding_right=-10                             \
+                       background.padding_left=-10                                   \
+                       background.y_offset=-10                                       \
+                       label="◀"                                                   \
+                       label.color=0xff5071bd                                   \
+                       label.padding_right=-1                                       \
+
+# layout Widget
+sketchybar --add item battery right                                                 \
+           --set battery update_freq=5                                             \
+                       icon.font="$FONT:Bold:10.6"                     \
+                       label.font="$FONT:Bold:10.6"                           \
+                       label.color=0xffffffff                                       \
+                       label.padding_right=5                                    \
+                       icon.padding_left=5                                 \
+                       background.color=0xff6e4187                            \
+                       background.height=45                                       \
+                       background.padding_right=-5                             \
+                       background.y_offset=-10                                       \
+                       script="$PLUGIN_DIR/yabai.sh"                              \
+
+sketchybar --add item line2 right                                                 \
+           --set line2                                              \
+                       label.font="$FONT:Bold:30.0"                           \
+                       label.color=0xffffffff                                       \
+                       label.padding_right=5                                    \
+                       background.color=0xff5071bd                                   \
+                       background.height=45                                       \
+                       background.padding_right=-5                             \
+                       background.padding_left=-10                                   \
+                       background.y_offset=-10                                       \
+                       label="◀"                                                   \
+                       label.color=0xff6e4187                            \
+                       label.padding_right=-1                                       \
+
+# vol Widget
+sketchybar --add item updates right                                                 \
+           --set updates update_freq=3600                                             \
+                       label.font="$FONT:Bold:10.6"                           \
+                       icon.font="Font Awesome 6 Free:Solid:13.3"                     \
+                       label.color=0xffffffff                                       \
+                       label.padding_right=10 \
+                       label.y_offset=0                                         \
+                       background.color=0xff5071bd                            \
+                       background.height=45                                       \
+                       background.padding_right=-5                             \
+                       background.y_offset=-10                                       \
+                       script="$PLUGIN_DIR/sound.sh"                              \
+
+sketchybar --add item line3 right                                                 \
+           --set line3 update_freq=5                                             \
+                       label.font="$FONT:Bold:30.0"                           \
+                       label.color=0xffffffff                                       \
+                       label.padding_right=5                                    \
+                       background.color=0xff6e4187                            \
+                       background.height=45                                       \
+                       background.padding_right=-10                             \
+                       background.padding_left=-10                                   \
+                       background.y_offset=-10                                       \
+                       label="◀"                                                   \
+                       label.color=0xff5071bd                                   \
+                       label.padding_right=-1                                       \
+
+# Uptime Widget
+sketchybar --add item uptime right                                                 \
+           --set uptime update_freq=5                                             \
+                       label.font="$FONT:Bold:10.6"                           \
+                       label.color=0xffffffff                                       \
+                       label.padding_right=5                                    \
+                       background.color=0xff6e4187                            \
+                       background.height=45                                       \
+                       background.padding_right=-5                             \
+                       background.y_offset=-10                                       \
+                       script="$PLUGIN_DIR/wifi.sh"                              \
+
+sketchybar --add item line4 right                                                 \
+           --set line4                                              \
+                       label.font="$FONT:Bold:30.0"                           \
+                       label.color=0xffffffff                                       \
+                       label.padding_right=5                                    \
+                       background.color=0xff5071bd                                   \
+                       background.height=45                                       \
+                       background.padding_right=-5                             \
+                       background.padding_left=-10                                   \
+                       background.y_offset=-10                                       \
+                       label="◀"                                                   \
+                       label.color=0xff6e4187                            \
+                       label.padding_right=-1                                       \
+
+# ssd Widget
+sketchybar --add item disk right                                                 \
+           --set disk  update_freq=3600                                             \
+                       label.font="$FONT:Bold:10.6"                           \
+                       icon.font="Font Awesome 6 Free:Solid:13.3"                     \
+                       label.color=0xffffffff                                       \
+                       label.padding_right=10 \
+                       label.y_offset=1                                         \
+                       background.color=0xff5071bd                            \
+                       background.height=45                                       \
+                       background.padding_right=-5                             \
+                       background.y_offset=-10                                       \
+                       script="$PLUGIN_DIR/package_monitor.sh"                              \
+
+sketchybar --add item line5 right                                                 \
+           --set line5 update_freq=5                                             \
+                       label.font="$FONT:Bold:30.0"                           \
+                       label.color=0xffffffff                                       \
+                       label.padding_right=5                                    \
+                       background.color=0xff6e4187                            \
+                       background.height=45                                       \
+                       background.padding_right=-10                             \
+                       background.padding_left=-10                                   \
+                       background.y_offset=-10                                       \
+                       label="◀"                                                   \
+                       label.color=0xff5071bd                                   \
+                       label.padding_right=-1                                       \
+
+# mem Widget
+sketchybar --add item mem right                                                 \
+           --set mem update_freq=5                                             \
+                       label.font="$FONT:Bold:10.6"                           \
+                       label.color=0xffffffff                                       \
+                       label.padding_right=5                                    \
+                       background.color=0xff6e4187                            \
+                       background.height=45                                       \
+                       background.padding_right=-5                             \
+                       background.y_offset=-10                                       \
+                       script="$PLUGIN_DIR/mem.sh"                              \
+
+sketchybar --add item line6 right                                                 \
+           --set line6                                              \
+                       label.font="$FONT:Bold:30.0"                           \
+                       label.color=0xffffffff                                       \
+                       label.padding_right=5                                    \
+                       background.color=0xff5071bd                                   \
+                       background.height=45                                       \
+                       background.padding_right=-5                             \
+                       background.padding_left=-10                                   \
+                       background.y_offset=-10                                       \
+                       label="◀"                                                   \
+                       label.color=0xff6e4187                            \
+                       label.padding_right=-1                                       \
+
+# cpu Widget
+sketchybar --add item cpu right                                                 \
+           --set cpu   update_freq=3600                                             \
+                       label.font="$FONT:Bold:10.6"                           \
+                       icon.font="Font Awesome 6 Free:Solid:13.3"                     \
+                       label.color=0xffffffff                                       \
+                       label.padding_right=10 \
+                       label.y_offset=1                                         \
+                       background.color=0xff5071bd                            \
+                       background.height=45                                       \
+                       background.padding_right=-5                             \
+                       background.y_offset=-10                                       \
+                       script="$PLUGIN_DIR/cpu.sh"                              \
+
+sketchybar --add item line7 right                                                 \
+           --set line7 update_freq=5                                             \
+                       label.font="$FONT:Bold:30.0"                           \
+                       label.color=0xffffffff                                       \
+                       label.padding_right=5                                    \
+                       background.height=45                                       \
+                       background.padding_right=-5                             \
+                       background.padding_left=-10                                   \
+                       background.y_offset=-10                                       \
+                       label="◀"                                                   \
+                       label.color=0xff5071bd                                   \
+                       label.padding_right=-1                                       \
+
+# If an update is avalible, update sketchybar when launched
+sketchybar --update
+
+# Finalize animations
+# sketchybar --animate sin 30 --bar notch_width=200
+
+# Notify when sketchybarrc is finished loading
+echo "sketchybar configuation loaded.."

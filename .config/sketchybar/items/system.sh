@@ -1,21 +1,41 @@
 #!/usr/bin/env sh
 
-HAS_BATTERY=$(if [ "$(pmset -g batt | grep "Battery")" = "" ]; then echo "false"; else echo "true"; fi)
-SVIM_POPUP_SCRIPT="sketchybar --set system.svim popup.drawing=off"
+sketchybar --add       item               discord right                                       \
+           --set       discord            background.image=/Users/aspect/.config/sketchybar/assets/discord-logo.png \
+                                          background.image.scale=0.015                            \
+                                          background.drawing=on                                 \
+                                          background.padding_right=5                            \
+                                          background.padding_left=-2                            \
+
+# sketchybar --add       alias              "Cardhop,Item-0" right                       \
+#            --set    "Cardhop,Item-0" update_freq=1                                 \
+#                                           icon.drawing=off                              \
+#                                           label.drawing=off                             \
+#                                           background.padding_left=-10                    \
+#                                           background.padding_right=-11                            \
 
 sketchybar --add       alias              "Control Center,WiFi" right                       \
            --set    "Control Center,WiFi" update_freq=1                                 \
                                           icon.drawing=off                              \
                                           label.drawing=off                             \
-                                          background.padding_left=-8                    \
-                                          background.padding_right=-11                   \
+                                          background.padding_left=-12                    \
+                                          background.padding_right=-8                            \
 
-sketchybar --add       alias              "SoundSource" right                       \
-           --set    "SoundSource" update_freq=1                                 \
+
+# sketchybar --add       item               spotify right                                       \
+#            --set       spotify            background.image=/Users/aspect/.config/sketchybar/assets/spotify-logo.png \
+#                                           background.image.scale=0.007                            \
+#                                           background.drawing=on                                 \
+#                                           background.padding_left=-2                    \
+
+sketchybar --add       alias              "Control Center,Sound" right                       \
+           --set    "Control Center,Sound" update_freq=1                                 \
                                           icon.drawing=off                              \
-                                          label.drawing=off                             \
-                                          background.padding_left=-7                    \
-                                          background.padding_right=-6                   \
+                                          label.font="Font Awesome 6 Brands:Regular:12.0"           \
+                                          background.padding_right=-14                           \
+                                          background.padding_left=-10                           \
 
-           --add       bracket            system                                        \
-                                          system.svim                                   \
+#sketchybar --add       item               obs right                                       \
+#           --set       obs                background.image=/Users/aspect/.config/sketchybar/assets/obs-logo.png \
+#                                          background.image.scale=0.028                            \
+#                                          background.drawing=on                                 \

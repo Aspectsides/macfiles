@@ -6,10 +6,15 @@ PREV=$(sketchybar --query packages | jq -r .text.label)
 sketchybar --set $NAME label=$LOADING
 
 # runs the outdated command and stores the output as a list variable.
-brewLIST=$(brew outdated && port outdated)
+brewLIST=$(brew outdated)
 
 # checks to see if the returned list is empty. If so, it sets the outdated packages list to zero, if not, sets it to the line count of the list.
-BREW=$(echo "$brewLIST" | wc -l)
+if [[ $brewLIST == "" ]]; then
+  BREW='0'
+  brewLIST=""
+else
+  BREW=$(echo "$brewLIST" | wc -l)
+fi
 
 
 # # runs the outdated command and stores the output as a list variable.
@@ -46,8 +51,8 @@ else
   FINAL=0
 fi
 
-sketchybar --set $NAME label="$FINAL updates" label.color=0xffc382db
+sketchybar --set $NAME label="$FINAL Updates"
 
 if [ "$FINAL" != "$PREV" ]; then
-  sketchybar --animate tanh 15 --set $NAME label.y_offset=5 label.y_offset=1
+  sketchybar --animate tanh 15 --set $NAME
 fi

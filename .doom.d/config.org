@@ -408,9 +408,13 @@ ln -s ~/.local/share/Trash .
 Setting the theme to doom-one.  To try out new themes, I set a keybinding for counsel-load-theme with 'SPC h t'.
 
 #+BEGIN_SRC emacs-lisp
-(setq doom-theme 'doom-dracula)
-(map! :leader
-      :desc "Load new theme" "h t" #'counsel-load-theme)
+(use-package autothemer
+  :ensure t)
+
+(load-theme 'doom-catppuccin-theme.el t)
+;;(setq doom-theme 'doom-dracula)
+;;(map! :leader
+;;      :desc "Load new theme" "h t" #'counsel-load-theme)
 #+END_SRC
 
 * ELFEED
@@ -555,9 +559,9 @@ Settings related to fonts within Doom Emacs:
 + 'font-lock-keyword-face' -- for keywords with special significance like 'setq' in elisp.
 
 #+BEGIN_SRC emacs-lisp
-(setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 13)
+(setq doom-font (font-spec :family "SFMono Nerd Font" :size 13)
       doom-variable-pitch-font (font-spec :family "Ubuntu" :size 13)
-      doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 24))
+      doom-big-font (font-spec :family "SFMono Nerd Font" :size 24))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
