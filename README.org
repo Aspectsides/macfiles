@@ -104,6 +104,10 @@ brew install font-fira-code-nerd-font
 #+begin_src shell
 brew install font-ubuntu
 #+end_src
+#+begin_src shell
+brew tap epk/epk
+brew install --cask font-sf-mono-nerd-font
+#+end_src
 
 ** Clone this repository
 #+begin_src shell
