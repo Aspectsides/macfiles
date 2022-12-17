@@ -19,7 +19,7 @@ yabai is a window management utility that is designed to work as an extension to
 These variables control the various settings of yabai. They are meant to be changed easily by anyone.
 
 #+begin_src conf
-export external_bar_height="24"
+export external_bar_height="47"
 export external_bar_position="top"
 export shadow_toggle="off"
 export mouse_mod="ctrl"
@@ -80,11 +80,11 @@ Configures the window caps based on gap width and the position of the bar
 
 #+begin_src conf
 if [[ $external_bar_position == "top" ]]; then
-   yabai -m config top_padding                $(expr $gap_width + $external_bar_height)
-   yabai -m config bottom_padding             $gap_width
-   yabai -m config left_padding               $gap_width
-   yabai -m config right_padding              $gap_width
-   yabai -m config window_gap                 $gap_width
+   yabai -m config top_padding                60
+   yabai -m config bottom_padding             10
+   yabai -m config left_padding               10
+   yabai -m config right_padding              10
+   yabai -m config window_gap                 8
 
 fi
 if [[ $external_bar_position == "bottom" ]]; then

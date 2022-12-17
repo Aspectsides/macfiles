@@ -1,4 +1,4 @@
-export external_bar_height="24"
+export external_bar_height="47"
 export external_bar_position="top"
 export shadow_toggle="off"
 export mouse_mod="ctrl"
@@ -39,11 +39,11 @@ yabai -m config active_window_border_color 0xFF6faec0
 yabai -m config normal_window_border_color 0xFF3e4050
 
 if [[ $external_bar_position == "top" ]]; then
-   yabai -m config top_padding                $(expr $gap_width + $external_bar_height)
-   yabai -m config bottom_padding             $gap_width
-   yabai -m config left_padding               $gap_width
-   yabai -m config right_padding              $gap_width
-   yabai -m config window_gap                 $gap_width
+   yabai -m config top_padding                60
+   yabai -m config bottom_padding             10
+   yabai -m config left_padding               10
+   yabai -m config right_padding              10
+   yabai -m config window_gap                 8
 
 fi
 if [[ $external_bar_position == "bottom" ]]; then
