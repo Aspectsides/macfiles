@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "coc-snippets": ">=3.1.6",
+    "coc-actions": ">=1.5.0",
+    "coc-java-debug": ">=0.3.0",
+    "coc-lists": ">=1.5.0",
+    "coc-java": ">=1.5.6",
+    "coc-tasks": ">=0.3.0",
+    "coc-pairs": ">=1.4.1"
+  }
+}

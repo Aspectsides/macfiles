@@ -7,7 +7,7 @@
 
 ## Import files (Colors, Fonts, Etc)
 import:
-  - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
+  - ~/.config/alacritty/alacritty/catppuccin-macchiato.yml
   - ~/.config/alacritty/fonts.yml
 
 ## Set environment variables
@@ -43,6 +43,43 @@ cursor:
     blinking: Off
 
   unfocused_hollow: false
+
+key_bindings:
+  - { key: Comma, mods: Command, chars: "\x02," }
+  - { key: D, mods: Command, chars: "\x02K" }
+  - { key: E, mods: Command, chars: "\x02\"" }
+  - { key: E, mods: Command|Shift, chars: "\x02%" }
+  - { key: F, mods: Command, chars: "\x02\x5b\x2f" }
+  - { key: F, mods: Command|Shift, chars: "lfcd\n" }
+  - { key: G, mods: Command, chars: "\x01g" }
+  - { key: J, mods: Command, chars: "\x02\x54" }
+  - { key: K, mods: Command, chars: "\x02s" }
+  - { key: Key1, mods: Command, chars: "\x01\x31" }
+  - { key: Key2, mods: Command, chars: "\x01\x32" }
+  - { key: Key3, mods: Command, chars: "\x01\x33" }
+  - { key: Key4, mods: Command, chars: "\x01\x34" }
+  - { key: Key5, mods: Command, chars: "\x01\x35" }
+  - { key: Key6, mods: Command, chars: "\x01\x36" }
+  - { key: Key7, mods: Command, chars: "\x01\x37" }
+  - { key: Key8, mods: Command, chars: "\x01\x38" }
+  - { key: Key9, mods: Command, chars: "\x01\x39" }
+  - { key: L, mods: Command, chars: "\x02L" }
+  - { key: LBracket, mods: Command, chars: "\x0f" }
+  - { key: LBracket, mods: Command|Shift, chars: "\x02p" }
+  - { key: O, mods: Command, chars: "\x02u" }
+  - { key: P, mods: Command, chars: ":Telescope find_files\n" }
+  - { key: P, mods: Command|Shift, chars: ":Telescope commands\n" }
+  - { key: Period, mods: Command, chars: ":ZenMode\n" }
+  - { key: Q, mods: Command, chars: ":q\n" }
+  - { key: R, mods: Command, chars: "\x1b\x5b\x41\x0a" }
+  - { key: RBracket, mods: Command, chars: "\x09" }
+  - { key: RBracket, mods: Command|Shift, chars: "\x02n" }
+  - { key: S, mods: Command, chars: "\x1b\x3a\x77\x0a" }
+  - { key: S, mods: Command|Shift, chars: ":wa\n" }
+  - { key: Semicolon, mods: Command, chars: "\x02:" }
+  - { key: T, mods: Command, chars: "\x01\x63" }
+  - { key: W, mods: Command, chars: "\x01\x78" }
+  - { key: Z, mods: Command, chars: "\x02z" }
 
 ## Live config reload
 live_config_reload: true

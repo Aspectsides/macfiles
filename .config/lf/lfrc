@@ -1,88 +1,120 @@
-# Basic Settings
-set hidden true
-set ignorecase true
-set icons true
-# Custom Functions
-cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
-map r push :rename<space>
-cmd mkdir ${{
-  printf "Directory Name: "
-  read ans
-  mkdir $ans
+set hidden on
+# interpreter for shell commands (needs to be POSIX compatible)
+set shell sh
+
+set icons
+
+# set '-eu' options for shell commands
+# These options are used to have safer shell commands. Option '-e' is used to
+# exit on error and option '-u' is used to give error for unset variables.
+# Option '-f' disables pathname expansion which can be useful when $f, $fs, and
+# $fx variables contain names with '*' or '?' characters. However, this option
+# is used selectively within individual commands as it can be limiting at
+# times.
+set shellopts '-eu'
+
+set promptfmt "\033[34;1m%d\033[0m\033[1m%f\033[0m"
+
+# set internal field separator (IFS) to "\n" for shell commands
+# This is useful to automatically split file names in $fs and $fx properly
+# since default file separator used in these variables (i.e. 'filesep' option)
+# is newline. You need to consider the values of these options and create your
+# commands accordingly.
+set ifs "\n"
+
+# leave some space at the top and the bottom of the screen
+set scrolloff 10
+
+# use enter for shell commands
+map <enter> shell
+
+# execute current file (must be executable)
+map x $$f
+map X !$f
+
+# dedicated keys for file opener actions
+map o &mimeopen $f
+map O $mimeopen --ask $f
+
+# define a custom 'open' command
+# This command is called when current file is not a directory. You may want to
+# use either file extensions and/or mime types here. Below uses an editor for
+# text files and a file opener for the rest.
+cmd open ${{
+    case $(file --mime-type $f -b) in
+        text/*) nvim $fx;;
+        *) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
+    esac
 }}
 
-cmd mkfile ${{
-  printf "File Name: "
-  read ans
-  $EDITOR $ans
+# define a custom 'rename' command without prompt for overwrite
+ cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
+ map r push :rename<space>
+
+# make sure trash folder exists
+# %mkdir -p ~/.trash
+
+# move current file or selected files to trash folder
+# (also see 'man mv' for backup/overwrite options)
+cmd trash %set -f; trash $fx
+
+ define a custom 'delete' command
+ cmd delete ${{
+     set -f
+     printf "$fx\n"
+     printf "delete?[y/n]"
+     read ans
+     [ $ans = "y" ] && rm -rf $fx
+ }}
+
+# use '<delete>' key for either 'trash' or 'delete' command
+ map <backspace2> trash
+# map <delete> delete
+
+# extract the current file with the right command
+# (xkcd link: https://xkcd.com/1168/)
+cmd extract ${{
+    set -f
+    case $f in
+        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $f;;
+        *.tar.gz|*.tgz) tar xzvf $f;;
+        *.tar.xz|*.txz) tar xJvf $f;;
+        *.zip) unzip $f;;
+        *.rar) unrar x $f;;
+        *.7z) 7z x $f;;
+    esac
 }}
 
-cmd setwallpaper %cp "$f" ~/.config/wall.jpg && xwallpaper --zoom "$f"
-
-cmd trash ${{
-  trash "$f"
+# compress current file or selected files with tar and gunzip
+cmd tar ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    tar czf $1.tar.gz $1
+    rm -rf $1
 }}
 
-# Archive bindings
-cmd unarchive ${{
-  case "$f" in
-      *.zip) unzip "$f" ;;
-      *.tar.gz) tar -xzvf "$f" ;;
-      *.tar.bz2) tar -xjvf "$f" ;;
-      *.tar) tar -xvf "$f" ;;
-      *) echo "Unsupported format" ;;
-  esac
+# compress current file or selected files with zip
+cmd zip ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    zip -r $1.zip $1
+    rm -rf $1
 }}
 
-# Trash bindings
-cmd trash ${{
-  files=$(printf "$fx" | tr '\n' ';')
-  while [ "$files" ]; do
-    file=${files%%;*}
-
-    mv "$(basename "$file")" ~/.Trash/
-    if [ "$files" = "$file" ]; then
-      files=''
+cmd fzf_jump ${{
+    res="$(find . -maxdepth 1 | fzf-tmux -p --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    if [ -d "$res" ] ; then
+        cmd="cd"
+    elif [ -f "$res" ] ; then
+        cmd="select"
     else
-      files="${files#*;}"
+        exit 0
     fi
-  done
+    lf -remote "send $id $cmd \"$res\""
 }}
 
-cmd restore_trash ${{
-  trash-restore
-}}
-
-# Bindings
-# Remove some defaults
-map m
-map o
-map n
-map "'"
-map '"'
-map d
-
-map c $vscodium "$f"
-
-map au unarchive
-map rn rename
-# Basic Functions
-map . set hidden!
-map DD trash
-map p paste
-map d cut
-map y copy
-map <enter> open
-map R reload
-map mf mkfile
-map md mkdir
-map bg setwallpaper
-map C clear
-
-map dd trash
-map dr restore_trash
-
-# Movement
 map gd cd ~/documents
 map gD cd ~/downloads
 map gp cd ~/pictures
@@ -91,3 +123,29 @@ map gr cd ~/repos
 map gv cd ~/videos/recordings
 map gs cd ~/.local/bin
 map gt cd ~/.local/share/Trash/files
+map <c-f> :fzf_jump
+
+cmd z %{{
+    result="$(zoxide query --exclude "${PWD}" -- "$1")"
+    lf -remote "send ${id} cd '${result}'"
+}}
+
+cmd zi ${{
+    result="$(zoxide query -i -- "$1""
+    lf -remote "send ${id} cd '${result}'"
+}}
+
+cmd git_branch ${{
+    git branch | fzf-tmux -p --reverse | xargs git checkout
+    pwd_shell=$(pwd)
+    lf -remote "send $id updir"
+    lf -remote "send $id cd \"$pwd_shell\""
+}}
+map gb :git_branch
+map gp ${{clear; git pull --rebase || true; echo "press ENTER"; read ENTER}}
+map gs ${{clear; git status; echo "press ENTER"; read ENTER}}
+map gl ${{clear; git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit}}
+
+map E %nvr --remote $fx
+map f $nvim $(fzf)
+

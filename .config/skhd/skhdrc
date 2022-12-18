@@ -1,7 +1,7 @@
 lalt - return : /Applications/Alacritty.app/Contents/MacOS/alacritty
 lalt + shift - c: yabai -m window --close
+lalt - w: /Applications/Alacritty.app/Contents/MacOS/alacritty -e lf
 lalt - q: emacsclient -c -a 'emacs' --eval '(dashboard-refresh-buffer)'
-lalt - w: emacsclient -c --eval '(elfeed)'
 lalt - b: /Applications/qutebrowser.app
 lalt - i: emacsclient -c --eval '(ibuffer)'
 lalt - e: open -a /Applications/Path\ Finder.app

@@ -6,19 +6,22 @@
 #           |_|
 
 # My fish config. Not much to see here; just some pretty standard stuff.
-
 ### ADDING TO THE PATH
 # First line removes the path; second line sets it.  Without the first line,
 # your path gets massive and fish becomes very slow.
 set -e fish_user_paths
 set -U fish_user_paths $HOME/.local/bin $HOME/Applications $fish_user_paths
-
+set -U EDITOR 'nvr-tmux --remote-wait-silent'
 ### EXPORT ###
 set fish_greeting                                 # Supresses fish's intro message
 set TERM "xterm-256color"                         # Sets the terminal type
 set EDITOR "emacs -cw"                 # $EDITOR use Emacs in terminal
 set VISUAL "emacsclient -c -a emacs"              # $VISUAL use Emacs in GUI mode
-
+if test -n "$TMUX"
+    eval (string replace "NVIM_LISTEN_ADDRESS=" "set -x NVIM_LISTEN_ADDRESS " (tmux show-environment -s NVIM_LISTEN_ADDRESS))
+else
+    set -x NVIM_LISTEN_ADDRESS /tmp/nvimsocket
+end
 ### SET MANPAGER
 ### Uncomment only one of these!
 
@@ -222,7 +225,7 @@ alias ...='cd ../..'
 alias .3='cd ../../..'
 alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
-alias neofetch='neofetch --backend kitty --source ~/.config/neofetch/chun-lo-deat2-crop.jpg'
+alias neofetch='neofetch --backend iterm2 --source ~/.config/neofetch/chun-lo-deat2-crop.jpg'
 # vim and emacs
 alias em='/usr/bin/emacs -nw'
 alias emacs="emacsclient -c"
@@ -230,6 +233,7 @@ alias doomsync="~/.emacs.d/bin/doom sync"
 alias doomdoctor="~/.emacs.d/bin/doom doctor"
 alias doomupgrade="~/.emacs.d/bin/doom upgrade"
 alias doompurge="~/.emacs.d/bin/doom purge"
+alias spatify="~/statify.sh"
 
 # Changing "ls" to "exa"
 alias ls='exa -al --color=always --group-directories-first' # my preferred listing
@@ -343,6 +347,9 @@ pokemon-colorscripts -r --no-title
 ### SETTING THE STARSHIP PROMPT ###
 starship init fish | source
 
+fish_add_path /Users/aspect/.config/tmux/plugins/t-smart-tmux-session-manager/bin
 test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
-
+zoxide init fish | source
 fish_add_path /Users/aspect/.spicetify
+fish_add_path ~/.config/tmux/plugins/tmux-nvr/bin
+fish_add_path ~/Library/Python/3.9/bin

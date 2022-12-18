@@ -122,6 +122,16 @@
                                     "key_code": "left_command"
                                 }
                             ]
+                        },
+                        {
+                            "from": {
+                                "key_code": "delete_or_backspace"
+                            },
+                            "to": [
+                                {
+                                    "key_code": "delete_or_backspace"
+                                }
+                            ]
                         }
                     ],
                     "treat_as_built_in_keyboard": false
